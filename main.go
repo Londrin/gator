@@ -2,24 +2,48 @@ package main
 
 import (
 	"fmt"
-	"log"
+	"os"
 
 	"github.com/Londrin/rss-aggregator/internal/config"
 )
 
 func main() {
-	cfg, err := config.Read()
+	curCfg, err := config.Read()
 	if err != nil {
-		log.Fatalf("error reading config: %v", err)
+		fmt.Printf("Unable to read config(second attempt): %v", err)
 	}
-	fmt.Printf("Ready config: %+v\n", cfg)
+	fmt.Printf("Reading config: %+v\n", curCfg)
 
-	err = cfg.SetUser("jeff")
+	curState := state{
+		cfg: &curCfg,
+	}
+	curCmds := commands{
+		cmds: make(map[string]func(*state, command) error),
+	}
+	curCmds.register("login", handlerLogin)
 
-	cfg, err = config.Read()
+	if len(os.Args) < 2 {
+		fmt.Printf("Input Error - Not enough arguments: %v\n", os.Args)
+		os.Exit(1)
+	}
+	cmdName := os.Args[1]
+	cmdArgs := os.Args[2:]
+
+	cmd := command{
+		name: cmdName,
+		args: cmdArgs,
+	}
+
+	err = curCmds.run(&curState, cmd)
 	if err != nil {
-		log.Fatalf("error reading config: %v", err)
+		fmt.Println(err)
+		os.Exit(1)
 	}
 
-	fmt.Printf("Ready config again: %+v\n", cfg)
+	curCfg, err = config.Read()
+	if err != nil {
+		fmt.Printf("Unable to read config(second attempt): %v", err)
+	}
+
+	fmt.Printf("Reading config again: %+v\n", curCfg)
 }
