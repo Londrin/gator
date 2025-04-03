@@ -14,14 +14,7 @@ import (
 
 const createFeed = `-- name: CreateFeed :one
 INSERT INTO feeds (id, created_at, updated_at, name, url, user_id)
-VALUES (
-	$1,
-	$2,
-	$3,
-	$4,
-	$5,
-	$6
-	)
+VALUES ($1,	$2,	$3,	$4,	$5,	$6)
 RETURNING id, created_at, updated_at, name, url, user_id, last_fetched_at
 `
 
@@ -129,6 +122,26 @@ type DeleteFeedParams struct {
 func (q *Queries) DeleteFeed(ctx context.Context, arg DeleteFeedParams) error {
 	_, err := q.db.ExecContext(ctx, deleteFeed, arg.UserID, arg.FeedID)
 	return err
+}
+
+const getFeedByName = `-- name: GetFeedByName :one
+SELECT id, created_at, updated_at, name, url, user_id, last_fetched_at from feeds
+WHERE feeds.name = $1
+`
+
+func (q *Queries) GetFeedByName(ctx context.Context, name string) (Feed, error) {
+	row := q.db.QueryRowContext(ctx, getFeedByName, name)
+	var i Feed
+	err := row.Scan(
+		&i.ID,
+		&i.CreatedAt,
+		&i.UpdatedAt,
+		&i.Name,
+		&i.Url,
+		&i.UserID,
+		&i.LastFetchedAt,
+	)
+	return i, err
 }
 
 const getFeedByUrl = `-- name: GetFeedByUrl :one

@@ -3,9 +3,11 @@ package main
 import (
 	"fmt"
 	"time"
+
+	"github.com/Londrin/rss-aggregator/internal/database"
 )
 
-func handlerAgg(s *state, cmd command) error {
+func handlerAgg(s *state, cmd command, user database.User) error {
 	if len(cmd.Args) != 1 {
 		return fmt.Errorf("usage %s <duration as string 'e.g 1s, 1m, 1h'>", cmd.Name)
 	}
@@ -21,6 +23,6 @@ func handlerAgg(s *state, cmd command) error {
 	ticker := time.NewTicker(timeBetweenRequests)
 
 	for ; ; <-ticker.C {
-		scrapeFeeds(s)
+		scrapeFeeds(s, user)
 	}
 }

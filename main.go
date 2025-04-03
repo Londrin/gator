@@ -42,12 +42,13 @@ func main() {
 	curCmds.register("register", handlerRegister)
 	curCmds.register("reset", handlerReset)
 	curCmds.register("users", handlerListUsers)
-	curCmds.register("agg", handlerAgg)
+	curCmds.register("agg", middlewareLoggedIn(handlerAgg))
 	curCmds.register("addfeed", middlewareLoggedIn(handlerAddFeed))
 	curCmds.register("feeds", handlerListFeeds)
 	curCmds.register("follow", middlewareLoggedIn(handlerFollowFeed))
 	curCmds.register("following", middlewareLoggedIn(handlerFollowingFeed))
 	curCmds.register("unfollow", middlewareLoggedIn(handlerUnfollow))
+	curCmds.register("browse", middlewareLoggedIn(handlerBrowse))
 
 	if len(os.Args) < 2 {
 		fmt.Printf("Input Error - Not enough arguments: %v\n", os.Args)
