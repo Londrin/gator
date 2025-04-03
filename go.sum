@@ -1,5 +1,3 @@
-github.com/Londrin/gator v0.0.0-20250403010952-3dcf4da23acb h1:H577DDcLXI7zwSpeRuuX0T13x+96SnXRqox9JpaKEME=
-github.com/Londrin/gator v0.0.0-20250403010952-3dcf4da23acb/go.mod h1:mYWdTMbbypmaZBrlf42kKGuYEtgGo7GSdtQ+IIWyxI0=
 github.com/google/uuid v1.6.0 h1:NIvaJDMOsjHA8n1jAhLSgzrAzy1Hgr+hNrb57e+94F0=
 github.com/google/uuid v1.6.0/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+yHo=
 github.com/lib/pq v1.10.9 h1:YXG7RB+JIjhP29X+OtkiDnYaXQwpS4JEWq7dtCCRUEw=

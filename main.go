@@ -38,6 +38,7 @@ func main() {
 	curCmds := commands{
 		registeredCommands: make(map[string]func(*state, command) error),
 	}
+
 	curCmds.register("login", handlerLogin)
 	curCmds.register("register", handlerRegister)
 	curCmds.register("reset", handlerReset)
@@ -49,6 +50,7 @@ func main() {
 	curCmds.register("following", middlewareLoggedIn(handlerFollowingFeed))
 	curCmds.register("unfollow", middlewareLoggedIn(handlerUnfollow))
 	curCmds.register("browse", middlewareLoggedIn(handlerBrowse))
+	curCmds.register("help", handlerHelp)
 
 	if len(os.Args) < 2 {
 		fmt.Printf("Input Error - Not enough arguments: %v\n", os.Args)
