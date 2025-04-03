@@ -5,8 +5,8 @@ import (
 	"fmt"
 	"os"
 
-	"github.com/Londrin/rss-aggregator/internal/config"
-	"github.com/Londrin/rss-aggregator/internal/database"
+	"github.com/Londrin/gator/internal/config"
+	"github.com/Londrin/gator/internal/database"
 	_ "github.com/lib/pq"
 )
 

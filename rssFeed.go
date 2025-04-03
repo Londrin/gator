@@ -12,7 +12,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/Londrin/rss-aggregator/internal/database"
+	"github.com/Londrin/gator/internal/database"
 	"github.com/google/uuid"
 )
 

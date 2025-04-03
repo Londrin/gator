@@ -1,4 +1,4 @@
-module github.com/Londrin/rss-aggregator
+module github.com/Londrin/gator
 
 go 1.24.0
 

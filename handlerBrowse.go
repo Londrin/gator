@@ -6,7 +6,7 @@ import (
 	"regexp"
 	"strconv"
 
-	"github.com/Londrin/rss-aggregator/internal/database"
+	"github.com/Londrin/gator/internal/database"
 )
 
 func handlerBrowse(s *state, cmd command, user database.User) error {
